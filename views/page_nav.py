@@ -7,8 +7,8 @@ class PageNav(discord.ui.View):
         self.value = value
         self.base_url = base_url
 
-    @discord.ui.button(label='<', style=discord.ButtonStyle.blurple)
-    async def previous(self, interaction: discord.Interaction, button: discord.ui.Button):
+    @discord.ui.button(label='<', style=discord.ButtonStyle.primary)
+    async def previous(self, button: discord.ui.Button, interaction: discord.Interaction):
         async with httpx.AsyncClient() as client:
             res = await client.get(f"{self.base_url}/user_dict")
             
@@ -39,7 +39,7 @@ class PageNav(discord.ui.View):
             await interaction.response.edit_message(embeds=[embed], view=self, delete_after=60)
     
     @discord.ui.button(label='>', style=discord.ButtonStyle.blurple)
-    async def next(self, interaction: discord.Interaction, button: discord.ui.Button):
+    async def next(self, button: discord.ui.Button, interaction: discord.Interaction):
         async with httpx.AsyncClient() as client:
             res = await client.get(f"{self.base_url}/user_dict")
             
